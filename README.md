@@ -1,30 +1,57 @@
-# React + TypeScript + Vite
+# Dementia Detection Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a frontend application for the Dementia Detection Model, aimed at predicting dementia disease in patients using AI technology. The application allows users to input data for patients and doctors and provides predictions on whether the patient has dementia. It utilizes React with Vite for fast development, Tailwind CSS for styling, Context API for state management, TypeScript for type safety, and Axios for fetching data from the backend.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone the repository:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+git clone https://github.com/AristideI/dimentia-detection-model-fn.git
+cd dementia-detection-frontend
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Install Dependencies
+
+```bash
+npm install
+```
+
+3. Run the development server
+
+```bash
+npm run dev
+```
+
+## Scripts
+
+### dev:
+
+Starts the development server using Vite.
+
+### build:
+
+Builds the project for production after type-checking with TypeScript.
+
+### lint:
+
+Runs ESLint to lint TypeScript and TypeScript React files.
+
+### preview:
+
+Preview the production build locally.
+
+## Technologies Used
+
+1. React
+2. Vite
+3. Tailwind CSS
+4. Context API
+5. TypeScript
+6. Axios
