@@ -1,23 +1,25 @@
+import { Link } from "react-router-dom";
+
 export default function HeroSection() {
   return (
-    <section className="pt-24 bg-white">
+    <section className="pt-24" id="home">
       <div className="px-12 mx-auto max-w-7xl">
         <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
           <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
             <span>Start</span>{" "}
-            <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
-              building a buzz
+            <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-primary-300 to-primary-400 lg:inline">
+              Dementia Prediction
             </span>{" "}
-            <span>around your product ?</span>
+            <span>With your patients !</span>
           </h1>
           <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
-            Start gaining the traction you've always wanted with our next-level
-            templates and designs. Crafted to help you tell your story.
+            Welcome to Dementia Prediction: AI-powered care. Admins manage,
+            doctors diagnose, patients benefit. Simple. Effective.
           </p>
           <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
-            <a
-              href="#_"
-              className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0"
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-primary-400 rounded-2xl sm:w-auto sm:mb-0"
             >
               Get Started
               <svg
@@ -32,10 +34,10 @@ export default function HeroSection() {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-            </a>
+            </Link>
             <a
-              href="#_"
-              className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg bg-gray-100 rounded-2xl sm:w-auto sm:mb-0"
+              href="#about"
+              className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg bg-primary-200 rounded-2xl sm:w-auto sm:mb-0"
             >
               Learn More
               <svg
