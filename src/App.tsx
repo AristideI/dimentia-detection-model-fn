@@ -17,6 +17,7 @@ import RecordsPage from "./pages/records/RecordsPage";
 import AddRecord from "./pages/records/AddRecord";
 import ProfilePage from "./pages/Profile";
 import DashboardLayout from "./components/DashboardLayout";
+import ReportsPage from "./pages/Reports";
 
 export default function App() {
   const route = createBrowserRouter(
@@ -29,17 +30,18 @@ export default function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="doctors">
             <Route index element={<DoctorsPage />} />
-            <Route path="addDoc" element={<AddDoctor />} />
+            <Route path="add" element={<AddDoctor />} />
           </Route>
           <Route path="patients">
             <Route index element={<PatientPage />} />
-            <Route path="addDoc" element={<AddPatient />} />
+            <Route path="add" element={<AddPatient />} />
           </Route>
           <Route path="records">
             <Route index element={<RecordsPage />} />
-            <Route path="addRecord" element={<AddRecord />} />
+            <Route path="add" element={<AddRecord />} />
           </Route>
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="reports" element={<ReportsPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

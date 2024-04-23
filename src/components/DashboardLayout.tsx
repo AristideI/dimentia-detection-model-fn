@@ -1,8 +1,15 @@
+import { Outlet } from "react-router";
+import AsideNav from "./AsideNav";
+import DashboardHeader from "./DashboardHeader";
+
 export default function DashboardLayout() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome to the dashboard</p>
-    </div>
+    <article className="flex justify-end">
+      <AsideNav />
+      <section className="w-full md:w-5/6 bg-primary-400">
+        <DashboardHeader />
+        <Outlet />
+      </section>
+    </article>
   );
 }
