@@ -1,8 +1,15 @@
+import AllOverview from "../components/dashboard/AllOverview";
+import AdminTable from "../components/tables/AdminTable";
+import DoctorsTable from "../components/tables/DoctorTable";
+import PatientTable from "../components/tables/PatientTable";
+
 export default function DashboardPage() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome to the dashboard</p>
-    </div>
+    <article>
+      <AllOverview />
+      <AdminTable />
+      <DoctorsTable />
+      <PatientTable />
+    </article>
   );
 }
