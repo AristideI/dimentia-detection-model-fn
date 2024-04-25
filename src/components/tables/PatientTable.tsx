@@ -1,6 +1,6 @@
 import PatientTableRow from "./PatientTableRow";
 
-export default function DoctorsTable() {
+export default function PatientTable() {
   const patients = [1, 2, 3, 4, 5];
   const patientRows = patients.map((doctor) => (
     <PatientTableRow key={doctor} />

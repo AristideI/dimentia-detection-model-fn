@@ -1,3 +1,9 @@
+import AdminTable from "../../components/tables/AdminTable";
+
 export default function AdminPage() {
-  return <article>This is admin page</article>;
+  return (
+    <article>
+      <AdminTable />
+    </article>
+  );
 }
