@@ -16,6 +16,7 @@ export interface UserReqDto {
   email: string;
   isAdmin: boolean;
   password: string;
+  confirmPassword: string;
 }
 
 export interface UserResDto {
@@ -29,15 +30,15 @@ export interface UserResDto {
 
 export interface PatientDto {
   id: string;
-  nid: string;
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
+  nid: string;
   dob: string;
 }
 
-export interface Record {
+export interface RecordDto {
   id: string;
   diabetic: boolean;
   alcoholLevel: number;

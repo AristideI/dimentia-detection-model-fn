@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { UserReqDto } from "../../types/interfaces";
 
-export default function AddAdminForm() {
+export default function AddDoctorForm() {
   const { register, handleSubmit } = useForm<UserReqDto>();
   const onSubmit = (data: UserReqDto) => {
     console.log(data);
@@ -12,7 +12,7 @@ export default function AddAdminForm() {
       className="flex flex-col justify-center items-center w-full md:w-2/3 gap-12 mt-12"
     >
       <div className="w-full">
-        <p className="text-left text-2xl font-bold">Create New Admin</p>
+        <p className="text-left text-2xl font-bold">Create New Doctor</p>
       </div>
       <div className="flex gap-6 w-full">
         <label className="flex flex-col w-1/2 gap-1 font-medium">
@@ -75,7 +75,7 @@ export default function AddAdminForm() {
         </label>
       </div>
       <button className="bg-primary-400 text-primary-100 py-2 w-full rounded-lg font-bold text-lg">
-        Add Admin
+        Add Doctor
       </button>
     </form>
   );
