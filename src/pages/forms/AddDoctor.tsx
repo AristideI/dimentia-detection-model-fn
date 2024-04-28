@@ -11,15 +11,15 @@ export default function AddDoctorForm() {
   const [image, setImage] = useState<File | null>(null);
 
   async function onSubmit(data: UserReqDto) {
-    const adminData: UserReqDto = {
+    const doctorData: UserReqDto = {
       ...data,
-      isAdmin: true,
+      isAdmin: false,
       profilePic: "",
     };
     try {
       const imageLink = await uploadImage(image!);
-      adminData.profilePic = imageLink;
-      await addDoctor(adminData);
+      doctorData.profilePic = imageLink;
+      await addDoctor(doctorData);
     } catch (error) {
       console.error(error);
       toast.error("Failed to Create Admin");
