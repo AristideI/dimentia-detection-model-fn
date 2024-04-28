@@ -1,11 +1,16 @@
 import { useForm } from "react-hook-form";
 import { PatientDto } from "../../types/interfaces";
+import { Except } from "type-fest";
+import addPatient from "../../utils/addPatient";
+import { useNavigate } from "react-router";
 
 export default function AddDoctorForm() {
-  const { register, handleSubmit } = useForm<PatientDto>();
-  const onSubmit = (data: PatientDto) => {
-    console.log(data);
-  };
+  const { register, handleSubmit } = useForm<Except<PatientDto, "id">>();
+  const navigate = useNavigate();
+  async function onSubmit(data: Except<PatientDto, "id">) {
+    await addPatient(data);
+    navigate("/patients");
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -64,6 +69,18 @@ export default function AddDoctorForm() {
             {...register("nid", { required: true })}
           />
         </label>
+        <label className="flex flex-col w-1/2 gap-1 font-medium">
+          Gender
+          <select
+            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
+            {...register("gender", { required: true })}
+          >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
+      </div>
+      <div className="flex gap-6 w-full">
         <label className="flex flex-col w-1/2 gap-1 font-medium">
           Date of Birth
           <input

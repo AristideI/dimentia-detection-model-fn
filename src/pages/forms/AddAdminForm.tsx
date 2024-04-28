@@ -5,10 +5,12 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import uploadImage from "../../utils/uploadImage";
 import { handleImageChange } from "../../utils/handleImageChange";
+import { useNavigate } from "react-router";
 
 export default function AddAdminForm() {
   const { register, handleSubmit } = useForm<UserReqDto>();
   const [image, setImage] = useState<File | null>(null);
+  const navigate = useNavigate();
 
   async function onSubmit(data: UserReqDto) {
     const adminData: UserReqDto = {
@@ -20,6 +22,8 @@ export default function AddAdminForm() {
       const imageLink = await uploadImage(image!);
       adminData.profilePic = imageLink;
       await addAdmin(adminData);
+      toast.success("Admin Created Successfully");
+      navigate("/admins");
     } catch (error) {
       console.error(error);
       toast.error("Failed to Create Admin");
