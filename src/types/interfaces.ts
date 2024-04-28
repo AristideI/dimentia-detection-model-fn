@@ -10,13 +10,14 @@ export interface LoginResDto {
 }
 
 export interface UserReqDto {
+  confirmPassword: string;
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
   isAdmin: boolean;
+  profilePic: string;
   password: string;
-  confirmPassword: string;
 }
 
 export interface UserResDto {
@@ -34,6 +35,7 @@ export interface PatientDto {
   lastName: string;
   phone: string;
   email: string;
+  gender: string;
   nid: string;
   dob: string;
 }

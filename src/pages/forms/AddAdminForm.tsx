@@ -1,11 +1,52 @@
 import { useForm } from "react-hook-form";
 import { UserReqDto } from "../../types/interfaces";
+import addAdmin from "../../utils/addAdmin";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import uploadImage from "../../utils/uploadImage";
 
 export default function AddAdminForm() {
-  const { register, handleSubmit } = useForm<UserReqDto>();
-  const onSubmit = (data: UserReqDto) => {
-    console.log(data);
-  };
+  const { register, handleSubmit } = useForm<
+    UserReqDto & { confirmPassword: string }
+  >();
+  const [image, setImage] = useState<File | null>(null);
+
+  async function onSubmit(data: UserReqDto) {
+    if (data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    const adminData: UserReqDto = {
+      ...data,
+      isAdmin: true,
+      profilePic: "",
+    };
+    try {
+      const imageLink = await uploadImage(image!);
+      adminData.profilePic = imageLink;
+      await addAdmin(adminData);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to Create Admin");
+      return;
+    }
+  }
+
+  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Check if size is greater than 3MB
+      if (file.size > 3500000) {
+        alert("Image size must not exceed 3MB");
+        e.target.value = "";
+        return;
+      }
+      setImage(file);
+    } else {
+      setImage(null);
+    }
+  }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -56,6 +97,15 @@ export default function AddAdminForm() {
       </div>
       <div className="flex gap-6 w-full">
         <label className="flex flex-col w-1/2 gap-1 font-medium">
+          Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
+          />
+        </label>
+        <label className="flex flex-col w-1/2 gap-1 font-medium">
           Password
           <input
             type="password"
@@ -64,6 +114,8 @@ export default function AddAdminForm() {
             {...register("password", { required: true })}
           />
         </label>
+      </div>
+      <div className="flex gap-6 w-full">
         <label className="flex flex-col w-1/2 gap-1 font-medium">
           Confirm Password
           <input
