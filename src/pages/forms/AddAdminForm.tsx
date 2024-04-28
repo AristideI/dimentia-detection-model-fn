@@ -4,18 +4,13 @@ import addAdmin from "../../utils/addAdmin";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import uploadImage from "../../utils/uploadImage";
+import { handleImageChange } from "../../utils/handleImageChange";
 
 export default function AddAdminForm() {
-  const { register, handleSubmit } = useForm<
-    UserReqDto & { confirmPassword: string }
-  >();
+  const { register, handleSubmit } = useForm<UserReqDto>();
   const [image, setImage] = useState<File | null>(null);
 
   async function onSubmit(data: UserReqDto) {
-    if (data.password !== data.confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
     const adminData: UserReqDto = {
       ...data,
       isAdmin: true,
@@ -29,21 +24,6 @@ export default function AddAdminForm() {
       console.error(error);
       toast.error("Failed to Create Admin");
       return;
-    }
-  }
-
-  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Check if size is greater than 3MB
-      if (file.size > 3500000) {
-        alert("Image size must not exceed 3MB");
-        e.target.value = "";
-        return;
-      }
-      setImage(file);
-    } else {
-      setImage(null);
     }
   }
 
@@ -101,7 +81,7 @@ export default function AddAdminForm() {
           <input
             type="file"
             accept="image/*"
-            onChange={handleImageChange}
+            onChange={(e) => handleImageChange(e, setImage)}
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
           />
         </label>
@@ -112,17 +92,6 @@ export default function AddAdminForm() {
             placeholder="Password"
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
             {...register("password", { required: true })}
-          />
-        </label>
-      </div>
-      <div className="flex gap-6 w-full">
-        <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Confirm Password
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("confirmPassword", { required: true })}
           />
         </label>
       </div>

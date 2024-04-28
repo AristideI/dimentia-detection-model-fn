@@ -10,7 +10,6 @@ export interface LoginResDto {
 }
 
 export interface UserReqDto {
-  confirmPassword: string;
   firstName: string;
   lastName: string;
   phone: string;

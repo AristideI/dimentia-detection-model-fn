@@ -1,11 +1,31 @@
 import { useForm } from "react-hook-form";
 import { UserReqDto } from "../../types/interfaces";
+import { useState } from "react";
+import { handleImageChange } from "../../utils/handleImageChange";
+import uploadImage from "../../utils/uploadImage";
+import addDoctor from "../../utils/addDoctor";
+import { toast } from "react-toastify";
 
 export default function AddDoctorForm() {
   const { register, handleSubmit } = useForm<UserReqDto>();
-  const onSubmit = (data: UserReqDto) => {
-    console.log(data);
-  };
+  const [image, setImage] = useState<File | null>(null);
+
+  async function onSubmit(data: UserReqDto) {
+    const adminData: UserReqDto = {
+      ...data,
+      isAdmin: true,
+      profilePic: "",
+    };
+    try {
+      const imageLink = await uploadImage(image!);
+      adminData.profilePic = imageLink;
+      await addDoctor(adminData);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to Create Admin");
+      return;
+    }
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -65,12 +85,12 @@ export default function AddDoctorForm() {
           />
         </label>
         <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Confirm Password
+          Image
           <input
-            type="password"
-            placeholder="Confirm Password"
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleImageChange(e, setImage)}
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("confirmPassword", { required: true })}
           />
         </label>
       </div>
