@@ -1,17 +1,14 @@
-import { Link } from "react-router-dom";
 
-export default function PatientTableRow() {
+import { PatientDto } from "../../types/interfaces";
+
+export default function PatientTableRow({ patient }: { patient: PatientDto }) {
+
   return (
     <tr className="hover:bg-gray-50">
       <th className="flex gap-3 px-6 py-4 font-normal text-gray-900 items-center">
-        <div className="relative h-10 w-10 ">
-          <img
-            className="h-full w-full rounded-full object-cover object-center"
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-          />
+        <div className="font-medium text-gray-700 text-lg">
+          {patient.firstName} {patient.lastName}
         </div>
-        <div className="font-medium text-gray-700 text-lg">Steven Jobs</div>
       </th>
       <td className="px-6 py-4">
         <span className="inline-flex items-center gap-1 rounded-full bg-secondary-red/10 px-2 py-1 text-xs font-semibold text-secondary-red">
@@ -19,9 +16,9 @@ export default function PatientTableRow() {
           Patient
         </span>
       </td>
-      <td className="px-6 py-4">0785478021</td>
-      <td className="px-6 py-4">23 may 2002</td>
-      <td className="px-6 py-4">1029384756657483</td>
+      <td className="px-6 py-4">{patient.phone}</td>
+      <td className="px-6 py-4">{patient.dob}</td>
+      <td className="px-6 py-4">{patient.nid}</td>
 
       <td className="px-6 py-4">
         <div className="flex justify-end gap-4">

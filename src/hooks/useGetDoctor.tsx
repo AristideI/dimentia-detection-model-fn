@@ -26,7 +26,7 @@ export function useGetDoctors() {
 
 async function getAdmins() {
   const token = localStorage.getItem("token");
-  const url = `${apiUrl}doctor`;
+  const url = `${apiUrl}/doctor`;
   const admins = await axios.get<UserResDto[]>(url, {
     headers: {
       Authorization: `Bearer ${token}`,

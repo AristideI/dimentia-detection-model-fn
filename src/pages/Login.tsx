@@ -1,17 +1,34 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { toast } from "react-toastify";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
+  const { login } = useAuthContext();
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(userInfo);
-    navigate("/dashboard");
+    setLoading(true);
+    try {
+      await login(userInfo.email, userInfo.password, isAdmin);
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error("Incorrect Password or Username");
+      setLoading(false);
+      setError(true);
+      return;
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -64,6 +81,20 @@ export default function LoginPage() {
                   required
                   className="flex items-center w-full px-5 py-4 mb-5 mr-2 bg-primary-200 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"
                 />
+                <label
+                  htmlFor="role"
+                  className="mb-2 text-sm text-start text-grey-900"
+                >
+                  Role<span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="role"
+                  className="flex items-center w-full px-5 py-4 mb-5 mr-2 bg-primary-200 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"
+                  onChange={(e) => setIsAdmin(e.target.value === "admin")}
+                >
+                  <option value="doctor">Doctor</option>
+                  <option value="admin">Admin</option>
+                </select>
                 <div className="flex flex-row justify-between mb-8">
                   <label className="relative inline-flex items-center mr-3 cursor-pointer select-none">
                     <input
@@ -83,8 +114,13 @@ export default function LoginPage() {
                   </a>
                 </div>
                 <button className="w-full px-6 py-5 mb-5 text-sm font-bold leading-none bg-primary-400 text-primary-100 transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500">
-                  Sign In
+                  {loading ? <LoadingSpinner size={50} /> : "Sign In"}
                 </button>
+                {error && (
+                  <p className="text-red-500 text-sm">
+                    Incorrect Password or Username
+                  </p>
+                )}
               </form>
             </div>
           </div>

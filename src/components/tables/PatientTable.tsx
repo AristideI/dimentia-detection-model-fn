@@ -1,9 +1,9 @@
+import { PatientDto } from "../../types/interfaces";
 import PatientTableRow from "./PatientTableRow";
 
-export default function PatientTable() {
-  const patients = [1, 2, 3, 4, 5];
-  const patientRows = patients.map((doctor) => (
-    <PatientTableRow key={doctor} />
+export default function PatientTable({ patients }: { patients: PatientDto[] }) {
+  const patientRows = patients.map((patient) => (
+    <PatientTableRow key={patient.id} patient={patient} />
   ));
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">

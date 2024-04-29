@@ -6,8 +6,9 @@ import axios from "axios";
 export default async function addPatient(
   patientData: Except<PatientDto, "id">
 ) {
-  const url = `${apiUrl}patient`;
+  const url = `${apiUrl}/patient`;
   const token = localStorage.getItem("token");
+  console.log(patientData);
 
   if (!token) {
     throw new Error("Token not found");

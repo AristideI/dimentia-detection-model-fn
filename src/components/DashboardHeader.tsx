@@ -1,9 +1,15 @@
+import { LoginResDto } from "../types/interfaces";
+
 export default function DashboardHeader() {
+  const user = JSON.parse(
+    localStorage.getItem("user") as string
+  ) as LoginResDto;
+
   return (
     <article className="text-dark flex justify-between items-center pb-12">
-      <section className="flex gap-6 items-center">
+      <section className="md:flex gap-6 items-center hidden">
         <div>
-          <p className="font-bold text-lg">Hello Aristide!</p>
+          <p className="font-bold text-lg">Hello {user.names}!</p>
           <p>Welcome back to dashboard</p>
         </div>
         <form>
@@ -16,8 +22,8 @@ export default function DashboardHeader() {
       </section>
       <section className="flex text-end items-center gap-6">
         <div>
-          <p className="font-bold text-lg">Aristide Isingizwe</p>
-          <p>Admin</p>
+          <p className="font-bold text-lg">{user.names}</p>
+          <p>{user.isAdmin ? "Admin" : "Doctor"}</p>
         </div>
         <img
           src="/user.jpg"

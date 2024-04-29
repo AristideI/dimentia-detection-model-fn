@@ -1,20 +1,31 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
+import { UserResDto } from "../types/interfaces";
 
 export default function AsideNav() {
+  const { logout } = useAuthContext();
+  const user = JSON.parse(
+    localStorage.getItem("user") as string
+  ) as unknown as UserResDto;
+  console.log(user);
+
+  const isAdmin = user.isAdmin;
+
   return (
     <article className="w-1/6 h-screen fixed top-0 left-0 hidden md:flex flex-col justify-between py-6 px-6">
       <img src="/logow.png" className="w-11/12" alt="" />
       <section className="flex flex-col gap-6">
         <CustomNavLink to="/dashboard" text="Dashboard" icon="home" />
-        <CustomNavLink to="/admins" text="Admins" icon="admin" />
+        {isAdmin && <CustomNavLink to="/admins" text="Admins" icon="admin" />}
         <CustomNavLink to="/doctors" text="Doctors" icon="doctor" />
         <CustomNavLink to="/patients" text="Patients" icon="patient" />
-        <CustomNavLink to="/records" text="Records" icon="record" />
-        <CustomNavLink to="/reports" text="Reports" icon="report" />
         <CustomNavLink to="/profile" text="Profile" icon="user" />
       </section>
-      <button className="font-bold text-primary-100 bg-secondary-red py-2 text-lg rounded-xl">
+      <button
+        className="font-bold text-primary-100 bg-secondary-red py-2 text-lg rounded-xl"
+        onClick={logout}
+      >
         Logout
       </button>
     </article>

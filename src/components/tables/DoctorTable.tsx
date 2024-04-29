@@ -1,8 +1,10 @@
+import { UserResDto } from "../../types/interfaces";
 import DoctorTableRow from "./DoctorTableRow";
 
-export default function DoctorsTable() {
-  const doctors = [1, 2, 3, 4, 5];
-  const doctorRows = doctors.map((doctor) => <DoctorTableRow key={doctor} />);
+export default function DoctorsTable({ doctors }: { doctors: UserResDto[] }) {
+  const doctorRows = doctors.map((doctor) => (
+    <DoctorTableRow key={doctor.id} doctor={doctor} />
+  ));
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
@@ -16,9 +18,6 @@ export default function DoctorsTable() {
             </th>
             <th scope="col" className="px-6 py-4 font-medium text-dark">
               Phone
-            </th>
-            <th scope="col" className="px-6 py-4 font-medium text-dark">
-              Team
             </th>
             <th scope="col" className="px-6 py-4 font-medium text-dark"></th>
           </tr>

@@ -14,8 +14,7 @@ export interface UserReqDto {
   lastName: string;
   phone: string;
   email: string;
-  isAdmin: boolean;
-  profilePic: string;
+  profilePic?: string;
   password: string;
 }
 
@@ -25,6 +24,17 @@ export interface UserResDto {
   lastName: string;
   phone: string;
   email: string;
+  token: string;
+  profilePic?: string;
+  isAdmin: boolean;
+}
+export interface LoginResDto {
+  id: string;
+  names: string;
+  phone: string;
+  email: string;
+  token: string;
+  profilePic?: string;
   isAdmin: boolean;
 }
 
@@ -67,5 +77,7 @@ export interface RecordDto {
   doctor_email: string;
   created_at: Date;
 }
+
+
 
 export type PatientRecordsResponseDto = PatientDto & { records: RecordDto[] };

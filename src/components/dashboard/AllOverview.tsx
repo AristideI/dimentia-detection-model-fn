@@ -1,11 +1,18 @@
-export default function AllOverview() {
+export default function AllOverview({
+  adminsCount,
+  doctorsCount,
+  patientsCount,
+}: {
+  adminsCount: number;
+  doctorsCount: number;
+  patientsCount: number;
+}) {
   return (
     <article className="flex flex-col gap-6">
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card title="Admins" count={52} icon="admin" />
-        <Card title="Doctors" count={12} icon="doctor" />
-        <Card title="Patients" count={24} icon="patient" />
-        <Card title="Records" count={36} icon="record" />
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card title="Admins" count={adminsCount} icon="admin" />
+        <Card title="Doctors" count={doctorsCount} icon="doctor" />
+        <Card title="Patients" count={patientsCount} icon="patient" />
       </section>
     </article>
   );

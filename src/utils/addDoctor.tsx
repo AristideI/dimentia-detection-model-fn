@@ -3,7 +3,7 @@ import { apiUrl } from "./apiUrl";
 import axios from "axios";
 
 export default async function addDoctor(doctorData: UserReqDto) {
-  const url = `${apiUrl}doctor`;
+  const url = `${apiUrl}/doctor`;
   const token = localStorage.getItem("token");
 
   if (!token) {
