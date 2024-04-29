@@ -8,6 +8,7 @@ export default async function addPatient(
 ) {
   const url = `${apiUrl}/patient`;
   const token = localStorage.getItem("token");
+  console.log(patientData);
 
   if (!token) {
     throw new Error("Token not found");
