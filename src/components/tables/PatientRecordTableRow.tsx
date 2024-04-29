@@ -1,28 +1,25 @@
+import dayjs from "dayjs";
+import { RecordDto } from "../../types/interfaces";
 
-import { PatientDto } from "../../types/interfaces";
+interface IPatientRecordTableRow {
+  record: RecordDto;
+}
 
-export default function PatientTableRow({ patient }: { patient: PatientDto }) {
-
+export default function PatientRecordTableRow({
+  record,
+}: IPatientRecordTableRow) {
   return (
     <tr className="hover:bg-gray-50">
-      <th className="flex gap-3 px-6 py-4 font-normal text-gray-900 items-center">
-        <div className="font-medium text-gray-700 text-lg">
-          {patient.firstName} {patient.lastName}
-        </div>
-      </th>
       <td className="px-6 py-4">
-        <span className="inline-flex items-center gap-1 rounded-full bg-secondary-red/10 px-2 py-1 text-xs font-semibold text-secondary-red">
-          <span className="h-1.5 w-1.5 rounded-full bg-secondary-red"></span>
-          Patient
-        </span>
+        {dayjs(record.created_at).format("YYYY-MM-DD HH:mm:ss")}
       </td>
-      <td className="px-6 py-4">{patient.phone}</td>
-      <td className="px-6 py-4">{patient.dob}</td>
-      <td className="px-6 py-4">{patient.nid}</td>
+      <td className="px-6 py-4">{record.doctor_email}</td>
+      <td className="px-6 py-4">{record.dementia ? "Yes" : "No"}</td>
+      <td className="px-6 py-4">{record.weight}</td>
 
       <td className="px-6 py-4">
         <div className="flex justify-end gap-4">
-          <Link x-data="{ tooltip: 'Delete' }" to={`/patients`}>
+          <a x-data="{ tooltip: 'Delete' }" href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -36,7 +33,7 @@ export default function PatientTableRow({ patient }: { patient: PatientDto }) {
                 clip-rule="evenodd"
               />
             </svg>
-          </Link>
+          </a>
         </div>
       </td>
     </tr>

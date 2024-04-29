@@ -73,30 +73,11 @@ export interface RecordDto {
   dementia: boolean;
   prescription: string;
   dosage: number;
-  patientNid: string;
-  doctorEmail: string;
+  patient_nid: string;
+  doctor_email: string;
+  created_at: Date;
 }
 
-export interface RecordReqDto {
-  diabetic: boolean;
-  alcoholLevel: number;
-  heartRate: number;
-  bloodOxygenLevel: number;
-  bodyTemperature: number;
-  weight: number;
-  MRI_Delay: number;
-  educationLevel: string;
-  dominantHand: string;
-  familyHistory: string;
-  smokingStatus: string;
-  APOE_ε4: string;
-  physicalActivity: string;
-  depressionStatus: string;
-  cognitiveTestScores: number;
-  medicationHistory: string;
-  nutritionDiet: string;
-  sleepQuality: string;
-  chronicHealthConditions: string;
-  patientNid: string;
-  doctorEmail: string;
-}
+
+
+export type PatientRecordsResponseDto = PatientDto & { records: RecordDto[] };
