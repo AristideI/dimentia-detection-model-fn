@@ -27,7 +27,7 @@ export function useGetPatientRecords(patientId: string) {
 }
 
 async function getPatientRecords(patientId: string) {
-  const url = `${apiUrl}patient/${patientId}/records`;
+  const url = `${apiUrl}/patient/${patientId}/records`;
   const token = localStorage.getItem("token");
   const admins = await axios.get<PatientRecordsResponseDto>(url, {
     headers: {
