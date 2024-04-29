@@ -2,12 +2,17 @@ import { createContext, useContext, useState } from "react";
 import { UserResDto } from "../types/interfaces";
 import axios from "axios";
 import { apiUrl } from "../utils/apiUrl";
+import { redirect } from "react-router";
 
 interface AuthContextType {
   user: UserResDto | null;
   token: string | null;
   isAuthenticated: boolean;
-  login: (userName: string, password: string) => Promise<void>;
+  login: (
+    userName: string,
+    password: string,
+    isAdmin: boolean
+  ) => Promise<void>;
   logout: () => void;
 }
 const AuthContext = createContext<AuthContextType>({
@@ -27,18 +32,24 @@ export default function AuthContextProvider({
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = async (userName: string, password: string) => {
-    console.log("=====================");
-    const user = await axios.post<UserResDto>(`${apiUrl}/login/admin`, {
-      email: userName,
-      password: password,
-    });
-    console.log(user.data);
+  const login = async (
+    userName: string,
+    password: string,
+    isAdmin: boolean
+  ) => {
+    const user = await axios.post<UserResDto>(
+      `${apiUrl}/login/${isAdmin ? "admin" : "doctor"}`,
+      {
+        email: userName,
+        password: password,
+      }
+    );
+    user.data.isAdmin = isAdmin;
     setUser(user.data);
     setToken(user.data.token);
     setIsAuthenticated(true);
     localStorage.setItem("token", user.data.token);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user.data));
   };
   const logout = () => {
     setUser(null);
@@ -46,6 +57,7 @@ export default function AuthContextProvider({
     setIsAuthenticated(false);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    redirect("/");
   };
 
   const values = {

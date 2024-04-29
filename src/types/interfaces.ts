@@ -20,8 +20,7 @@ export interface UserReqDto {
 
 export interface UserResDto {
   id: string;
-  firstName: string;
-  lastName: string;
+  names: string;
   phone: string;
   email: string;
   token: string;

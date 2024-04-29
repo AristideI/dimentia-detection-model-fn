@@ -12,13 +12,14 @@ export default function LoginPage() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     try {
-      await login(userInfo.email, userInfo.password);
+      await login(userInfo.email, userInfo.password, isAdmin);
       navigate("/dashboard");
     } catch (error) {
       toast.error("Incorrect Password or Username");
@@ -80,6 +81,20 @@ export default function LoginPage() {
                   required
                   className="flex items-center w-full px-5 py-4 mb-5 mr-2 bg-primary-200 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"
                 />
+                <label
+                  htmlFor="role"
+                  className="mb-2 text-sm text-start text-grey-900"
+                >
+                  Role<span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="role"
+                  className="flex items-center w-full px-5 py-4 mb-5 mr-2 bg-primary-200 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"
+                  onChange={(e) => setIsAdmin(e.target.value === "admin")}
+                >
+                  <option value="doctor">Doctor</option>
+                  <option value="admin">Admin</option>
+                </select>
                 <div className="flex flex-row justify-between mb-8">
                   <label className="relative inline-flex items-center mr-3 cursor-pointer select-none">
                     <input
