@@ -18,6 +18,8 @@ import ProfilePage from "./pages/Profile";
 import DashboardLayout from "./components/DashboardLayout";
 import AdminPage from "./pages/users/Admin";
 import AddAdminForm from "./pages/forms/AddAdminForm";
+import authLoader from "./utils/loaders/authLoader";
+import adminLoader from "./utils/loaders/adminLoader";
 
 export default function App() {
   const route = createBrowserRouter(
@@ -26,22 +28,22 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="contact" element={<Faq />} />
-        <Route element={<DashboardLayout />}>
+        <Route element={<DashboardLayout />} loader={authLoader}>
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="doctors">
             <Route index element={<DoctorsPage />} />
-            <Route path="add" element={<AddDoctor />} />
+            <Route path="add" element={<AddDoctor />} loader={adminLoader} />
           </Route>
           <Route path="patients">
             <Route index element={<PatientPage />} />
-            <Route path="add" element={<AddPatient />} />
+            <Route path="add" element={<AddPatient />} loader={adminLoader} />
             <Route path=":id" element={<AddPatient />} />
             <Route path=":id/test" element={<AddRecord />} />
             <Route path=":id/:recordId" element={<AddRecord />} />
           </Route>
           <Route path="admins">
-            <Route index element={<AdminPage />} />
-            <Route path="add" element={<AddAdminForm />} />
+            <Route index element={<AdminPage />} loader={adminLoader} />
+            <Route path="add" element={<AddAdminForm />} loader={adminLoader} />
           </Route>
           <Route path="profile" element={<ProfilePage />} />
         </Route>
