@@ -3,13 +3,26 @@ import { PatientDto } from "../../types/interfaces";
 import { Except } from "type-fest";
 import addPatient from "../../utils/addPatient";
 import { useNavigate } from "react-router";
+import { useState } from "react";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { toast } from "react-toastify";
 
 export default function AddDoctorForm() {
   const { register, handleSubmit } = useForm<Except<PatientDto, "id">>();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   async function onSubmit(data: Except<PatientDto, "id">) {
-    await addPatient(data);
-    navigate("/patients");
+    setLoading(true);
+    try {
+      await addPatient(data);
+      toast.success("Patient Created Successfully");
+      navigate("/patients");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to Create Patient");
+      return;
+    }
   }
   return (
     <form
@@ -92,7 +105,7 @@ export default function AddDoctorForm() {
         </label>
       </div>
       <button className="bg-primary-400 text-primary-100 py-2 w-full rounded-lg font-bold text-lg">
-        Add Doctor
+        {loading ? <LoadingSpinner size={40} /> : "Add Patient"}
       </button>
     </form>
   );

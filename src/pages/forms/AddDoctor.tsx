@@ -6,16 +6,18 @@ import uploadImage from "../../utils/uploadImage";
 import addDoctor from "../../utils/addDoctor";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function AddDoctorForm() {
   const { register, handleSubmit } = useForm<UserReqDto>();
   const [image, setImage] = useState<File | null>(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function onSubmit(data: UserReqDto) {
+    setLoading(true);
     const doctorData: UserReqDto = {
       ...data,
-      isAdmin: false,
       profilePic: "",
     };
     try {
@@ -28,6 +30,8 @@ export default function AddDoctorForm() {
       console.error(error);
       toast.error("Failed to Create Admin");
       return;
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -99,7 +103,7 @@ export default function AddDoctorForm() {
         </label>
       </div>
       <button className="bg-primary-400 text-primary-100 py-2 w-full rounded-lg font-bold text-lg">
-        Add Doctor
+        {loading ? <LoadingSpinner size={40} /> : "Create Doctor"}
       </button>
     </form>
   );

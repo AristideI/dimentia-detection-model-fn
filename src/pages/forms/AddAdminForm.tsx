@@ -6,13 +6,16 @@ import { toast } from "react-toastify";
 import uploadImage from "../../utils/uploadImage";
 import { handleImageChange } from "../../utils/handleImageChange";
 import { useNavigate } from "react-router";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function AddAdminForm() {
   const { register, handleSubmit } = useForm<UserReqDto>();
   const [image, setImage] = useState<File | null>(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function onSubmit(data: UserReqDto) {
+    setLoading(true);
     const adminData: UserReqDto = {
       ...data,
       profilePic: "",
@@ -27,6 +30,8 @@ export default function AddAdminForm() {
       console.error(error);
       toast.error("Failed to Create Admin");
       return;
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -99,7 +104,7 @@ export default function AddAdminForm() {
         </label>
       </div>
       <button className="bg-primary-400 text-primary-100 py-2 w-full rounded-lg font-bold text-lg">
-        Add Admin
+        {loading ? <LoadingSpinner size={40} /> : "Add Admin"}
       </button>
     </form>
   );
