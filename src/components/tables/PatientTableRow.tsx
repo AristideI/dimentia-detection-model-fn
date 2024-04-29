@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import { PatientDto } from "../../types/interfaces";
 
 export default function PatientTableRow({ patient }: { patient: PatientDto }) {
