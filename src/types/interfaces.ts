@@ -63,6 +63,9 @@ export interface RecordDto {
   dementia: boolean;
   prescription: string;
   dosage: number;
-  patientNid: string;
-  doctorId: string;
+  patient_nid: string;
+  doctor_email: string;
+  created_at: Date;
 }
+
+export type PatientRecordsResponseDto = PatientDto & { records: RecordDto[] };

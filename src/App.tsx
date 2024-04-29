@@ -18,6 +18,7 @@ import ProfilePage from "./pages/Profile";
 import DashboardLayout from "./components/DashboardLayout";
 import AdminPage from "./pages/users/Admin";
 import AddAdminForm from "./pages/forms/AddAdminForm";
+import RecordsPage from "./pages/records/RecordsPage";
 
 export default function App() {
   const route = createBrowserRouter(
@@ -35,7 +36,7 @@ export default function App() {
           <Route path="patients">
             <Route index element={<PatientPage />} />
             <Route path="add" element={<AddPatient />} />
-            <Route path=":id" element={<AddPatient />} />
+            <Route path=":id" element={<RecordsPage />} />
             <Route path=":id/test" element={<AddRecord />} />
             <Route path=":id/:recordId" element={<AddRecord />} />
           </Route>
