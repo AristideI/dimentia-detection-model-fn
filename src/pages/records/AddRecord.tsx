@@ -1,37 +1,9 @@
-// export interface Record {
-//   id: string;
-//   diabetic: boolean;
-//   alcoholLevel: number;
-//   heartRate: number;
-//   bloodOxygenLevel: number;
-//   bodyTemperature: number;
-//   weight: number;
-//   MRI_Delay: number;
-//   educationLevel: string;
-//   dominantHand: string;
-//   familyHistory: string;
-//   smokingStatus: string;
-//   APOE_ε4: string;
-//   physicalActivity: string;
-//   depressionStatus: string;
-//   cognitiveTestScores: number;
-//   medicationHistory: string;
-//   nutritionDiet: string;
-//   sleepQuality: string;
-//   chronicHealthConditions: string;
-//   dementia: boolean;
-//   prescription: string;
-//   dosage: number;
-//   patientNid: string;
-//   doctorId: string;
-// }
-
 import { useForm } from "react-hook-form";
-import { RecordDto } from "../../types/interfaces";
+import { RecordReqDto } from "../../types/interfaces";
 
 export default function AddRecord() {
-  const { register, handleSubmit } = useForm<RecordDto>();
-  const onSubmit = (data: RecordDto) => {
+  const { register, handleSubmit } = useForm<RecordReqDto>();
+  const onSubmit = (data: RecordReqDto) => {
     console.log(data);
   };
 
@@ -41,36 +13,18 @@ export default function AddRecord() {
       className="flex flex-col justify-center items-center w-full md:w-2/3 gap-12 mt-12"
     >
       <div className="w-full">
-        <p className="text-left text-2xl font-bold">Test Patient</p>
-      </div>
-      <div className="flex gap-6 w-full">
-        <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Patient National ID
-          <input
-            type="text"
-            placeholder="Patient National ID"
-            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("patientNid", { required: true })}
-          />
-        </label>
-        <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Doctor ID
-          <input
-            type="text"
-            placeholder="Doctor ID"
-            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("doctorId", { required: true })}
-          />
-        </label>
+        <p className="text-left text-2xl font-bold">Biomedical Data</p>
       </div>
       <div className="flex gap-6 w-full">
         <label className="flex flex-col w-1/2 gap-1 font-medium">
           Diabetic
-          <input
-            type="checkbox"
+          <select
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
             {...register("diabetic", { required: true })}
-          />
+          >
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
         </label>
         <label className="flex flex-col w-1/2 gap-1 font-medium">
           Alcohol Level
@@ -133,14 +87,17 @@ export default function AddRecord() {
           />
         </label>
         <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Education Level
+          Chronic Health Conditions
           <input
             type="text"
-            placeholder="Education Level"
+            placeholder="Chronic Health Conditions"
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("educationLevel", { required: true })}
+            {...register("chronicHealthConditions", { required: true })}
           />
         </label>
+      </div>
+      <div className="w-full">
+        <p className="text-left text-2xl font-bold">Demographic Data</p>
       </div>
       <div className="flex gap-6 w-full">
         <label className="flex flex-col w-1/2 gap-1 font-medium">
@@ -242,51 +199,18 @@ export default function AddRecord() {
           />
         </label>
       </div>
-      <div className="w-full">
-        <p className="text-left text-2xl font-bold">Test Record</p>
-      </div>
       <div className="flex gap-6 w-full">
         <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Chronic Health Conditions
+          Education Level
           <input
             type="text"
-            placeholder="Chronic Health Conditions"
+            placeholder="Education Level"
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("chronicHealthConditions", { required: true })}
-          />
-        </label>
-        <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Dementia
-          <input
-            type="checkbox"
-            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("dementia", { required: true })}
+            {...register("educationLevel", { required: true })}
           />
         </label>
       </div>
-      <div className="w-full">
-        <p className="text-left text-2xl font-bold">Prescription</p>
-      </div>
-      <div className="flex gap-6 w-full">
-        <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Prescription
-          <input
-            type="text"
-            placeholder="Prescription"
-            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("prescription", { required: true })}
-          />
-        </label>
-        <label className="flex flex-col w-1/2 gap-1 font-medium">
-          Dosage
-          <input
-            type="number"
-            placeholder="Dosage"
-            className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("dosage", { required: true })}
-          />
-        </label>
-      </div>
+
       <button className="bg-primary-400 text-primary-100 py-2 w-full rounded-lg font-bold text-lg">
         Test
       </button>

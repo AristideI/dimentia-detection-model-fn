@@ -15,7 +15,6 @@ export default function AddAdminForm() {
   async function onSubmit(data: UserReqDto) {
     const adminData: UserReqDto = {
       ...data,
-      isAdmin: true,
       profilePic: "",
     };
     try {
