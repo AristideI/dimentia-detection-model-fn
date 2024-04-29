@@ -7,7 +7,7 @@ export default function AdminTableRow({ admin }: { admin: UserResDto }) {
         <div className="relative h-10 w-10">
           <img
             className="h-full w-full rounded-full object-cover object-center"
-            src={admin.profilePic || "/user.jpg"}
+            src={admin.profilePic || "/profile.jpg"}
             alt=""
           />
         </div>

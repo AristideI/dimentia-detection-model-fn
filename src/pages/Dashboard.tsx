@@ -16,9 +16,9 @@ export default function DashboardPage() {
   return (
     <article>
       <AllOverview adminsCount={23} patientsCount={52} doctorsCount={23} />
-      <AdminTable admins={admins.slice(5)} />
-      <DoctorsTable doctors={doctors.slice(5)} />
-      <PatientTable patients={patients.slice(5)} />
+      <AdminTable admins={admins.slice(0, 5)} />
+      <DoctorsTable doctors={doctors.slice(0, 5)} />
+      <PatientTable patients={patients.slice(0, 5)} />
     </article>
   );
 }

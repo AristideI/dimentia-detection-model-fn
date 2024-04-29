@@ -1,17 +1,19 @@
-export default function DoctorTableRow() {
+import { UserResDto } from "../../types/interfaces";
+
+export default function DoctorTableRow({ doctor }: { doctor: UserResDto }) {
   return (
     <tr className="hover:bg-gray-50">
       <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
         <div className="relative h-10 w-10">
           <img
             className="h-full w-full rounded-full object-cover object-center"
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src={doctor.profilePic || "/profile.jpg"}
             alt=""
           />
         </div>
         <div className="text-sm">
-          <div className="font-medium text-gray-700">Steven Jobs</div>
-          <div className="text-gray-400">jobs@sailboatui.com</div>
+          <div className="font-medium text-gray-700">{`${doctor.firstName} ${doctor.lastName}}`}</div>
+          <div className="text-gray-400">{doctor.email}</div>
         </div>
       </th>
       <td className="px-6 py-4">
@@ -20,8 +22,7 @@ export default function DoctorTableRow() {
           Doctor
         </span>
       </td>
-      <td className="px-6 py-4">0785478021</td>
-      <td className="px-6 py-4">Kacyiru Hospital</td>
+      <td className="px-6 py-4">{doctor.phone}</td>
 
       <td className="px-6 py-4">
         <div className="flex justify-end gap-4">

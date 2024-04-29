@@ -1,18 +1,18 @@
 import axios from "axios";
 import { apiUrl } from "../utils/apiUrl";
-import { UserResDto } from "../types/interfaces";
+import { PatientDto } from "../types/interfaces";
 import { useEffect, useState } from "react";
 
 export function useGetPatients() {
-  const [patients, setDoctors] = useState<UserResDto[]>([]);
+  const [patients, setPatients] = useState<PatientDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const allAdmins = await getAdmins();
-        setDoctors(allAdmins);
+        const allPatients = await getPatients();
+        setPatients(allPatients);
         setLoading(false);
       } catch (error) {
         setError(true);
@@ -24,10 +24,10 @@ export function useGetPatients() {
   return { patients, loading, error };
 }
 
-async function getAdmins() {
+async function getPatients() {
   const token = localStorage.getItem("token");
   const url = `${apiUrl}/doctor`;
-  const admins = await axios.get<UserResDto[]>(url, {
+  const admins = await axios.get<PatientDto[]>(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
