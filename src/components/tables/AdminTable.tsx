@@ -1,8 +1,10 @@
+import { UserResDto } from "../../types/interfaces";
 import AdminTableRow from "./AdminTableRow";
 
-export default function AdminTable() {
-  const admins = [1, 2, 3, 4, 5];
-  const adminRows = admins.map((admin) => <AdminTableRow key={admin} />);
+export default function AdminTable({ admins }: { admins: UserResDto[] }) {
+  const adminRows = admins.map((admin) => (
+    <AdminTableRow key={admin.id} admin={admin} />
+  ));
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">

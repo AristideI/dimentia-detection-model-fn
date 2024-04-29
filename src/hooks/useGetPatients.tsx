@@ -4,7 +4,7 @@ import { UserResDto } from "../types/interfaces";
 import { useEffect, useState } from "react";
 
 export function useGetPatients() {
-  const [doctors, setDoctors] = useState<UserResDto[]>([]);
+  const [patients, setDoctors] = useState<UserResDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
@@ -21,12 +21,12 @@ export function useGetPatients() {
     fetchAdmins();
   }, []);
 
-  return { doctors, loading, error };
+  return { patients, loading, error };
 }
 
 async function getAdmins() {
   const token = localStorage.getItem("token");
-  const url = `${apiUrl}doctor`;
+  const url = `${apiUrl}/doctor`;
   const admins = await axios.get<UserResDto[]>(url, {
     headers: {
       Authorization: `Bearer ${token}`,

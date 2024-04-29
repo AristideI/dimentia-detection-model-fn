@@ -14,16 +14,27 @@ export interface UserReqDto {
   lastName: string;
   phone: string;
   email: string;
-  profilePic: string;
+  profilePic?: string;
   password: string;
 }
 
 export interface UserResDto {
   id: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  token: string;
+  profilePic?: string;
+  isAdmin: boolean;
+}
+export interface LoginResDto {
+  id: string;
   names: string;
   phone: string;
   email: string;
   token: string;
+  profilePic?: string;
   isAdmin: boolean;
 }
 

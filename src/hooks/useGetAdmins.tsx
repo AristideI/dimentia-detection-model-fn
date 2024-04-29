@@ -25,7 +25,7 @@ export function useGetAdmins() {
 }
 
 async function getAdmins() {
-  const url = `${apiUrl}admin-user`;
+  const url = `${apiUrl}/admin-user`;
   const token = localStorage.getItem("token");
   const admins = await axios.get<UserResDto[]>(url, {
     headers: {
