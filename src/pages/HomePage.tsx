@@ -8,7 +8,6 @@ export default function HomePage() {
     <article>
       <Navbar />
       <HeroSection />
-      <AboutSection />
       <Footer />
     </article>
   );

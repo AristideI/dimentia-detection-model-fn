@@ -17,7 +17,11 @@ export default function DashboardPage() {
   if (loading || doctorsLoading || PatientLoading) return <LoadingSection />;
   return (
     <article>
-      <AllOverview adminsCount={23} patientsCount={52} doctorsCount={23} />
+      <AllOverview
+        adminsCount={admins.length}
+        patientsCount={patients.length}
+        doctorsCount={doctors.length}
+      />
       {isAdmin && <AdminTable admins={admins.slice(0, 5)} />}
       <DoctorsTable doctors={doctors.slice(0, 5)} />
       <PatientTable patients={patients.slice(0, 5)} />

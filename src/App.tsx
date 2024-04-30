@@ -21,7 +21,7 @@ import AddAdminForm from "./pages/forms/AddAdminForm";
 import RecordsPage from "./pages/records/RecordsPage";
 import authLoader from "./utils/loaders/authLoader";
 import adminLoader from "./utils/loaders/adminLoader";
-
+import ViewRecord from "./pages/records/ViewRecord";
 
 export default function App() {
   const route = createBrowserRouter(
@@ -41,7 +41,7 @@ export default function App() {
             <Route path="add" element={<AddPatient />} loader={adminLoader} />
             <Route path=":id" element={<RecordsPage />} />
             <Route path=":id/test" element={<AddRecord />} />
-            <Route path=":id/:recordId" element={<AddRecord />} />
+            <Route path=":id/:recordId" element={<ViewRecord />} />
           </Route>
           <Route path="admins">
             <Route index element={<AdminPage />} loader={adminLoader} />
