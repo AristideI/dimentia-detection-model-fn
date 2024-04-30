@@ -27,7 +27,6 @@ export default function AddAdminForm() {
       toast.success("Admin Created Successfully");
       navigate("/admins");
     } catch (error) {
-      console.error(error);
       toast.error("Failed to Create Admin");
       return;
     } finally {
