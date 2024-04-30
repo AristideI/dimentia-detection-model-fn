@@ -37,7 +37,7 @@ export default function ViewRecord() {
   console.log(patientId, recordId);
   return (
     <>
-      <section className="flex justify-between items-center px-10">
+      <section className="flex justify-end items-center px-10 mb-10">
         <button
           className="font-bold text-primary-100 bg-primary-400 px-8 py-2 rounded-md"
           onClick={convertToPdf}
@@ -47,6 +47,7 @@ export default function ViewRecord() {
       </section>
       <article className="flex flex-col gap-6" ref={contentRef}>
         <section>
+        <img src="/logow.png" className="w-60" alt="" />
           <h1 className="text-3xl font-semibold text-dark text-center">
             Patient Record Details
           </h1>
@@ -76,11 +77,11 @@ export default function ViewRecord() {
         <table className="min-w-full divide-y divide-primary-400">
           <thead className="bg-primary-300 text-dark text-bold">
             <tr>
-              <th scope="col" className="px-12 py-3.5 text-left">
+              <th scope="col" className="px-5 py-3.5 text-left">
                 Test
               </th>
 
-              <th scope="col" className="px-4 py-3.5 text-left">
+              <th scope="col" className="px-16 py-3.5 text-left">
                 Value
               </th>
             </tr>
