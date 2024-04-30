@@ -27,7 +27,6 @@ export default function AddDoctorForm() {
       toast.success("Doctor Created Successfully");
       navigate("/doctors");
     } catch (error) {
-      console.error(error);
       toast.error("Failed to Create Admin");
       return;
     } finally {

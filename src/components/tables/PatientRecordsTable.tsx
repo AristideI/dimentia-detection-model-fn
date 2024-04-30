@@ -10,7 +10,6 @@ export default function PatientRecordsTable({
   const patientRows = patientRecords.records.map((record) => (
     <PatientRecordTableRow key={record.id}  record={record}/>
   ));
-  console.log(patientRecords);
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">

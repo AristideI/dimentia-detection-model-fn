@@ -19,7 +19,6 @@ export default function AddDoctorForm() {
       toast.success("Patient Created Successfully");
       navigate("/patients");
     } catch (error) {
-      console.error(error);
       toast.error("Failed to Create Patient");
       return;
     }

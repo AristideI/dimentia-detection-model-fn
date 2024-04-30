@@ -8,7 +8,6 @@ export default function AsideNav() {
   const user = JSON.parse(
     localStorage.getItem("user") as string
   ) as unknown as UserResDto;
-  console.log(user);
 
   const isAdmin = user.isAdmin;
 

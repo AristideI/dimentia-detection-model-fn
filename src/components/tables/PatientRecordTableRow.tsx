@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { RecordDto } from "../../types/interfaces";
+import { Link } from "react-router-dom";
 
 interface IPatientRecordTableRow {
   record: RecordDto;
@@ -19,7 +20,10 @@ export default function PatientRecordTableRow({
 
       <td className="px-6 py-4">
         <div className="flex justify-end gap-4">
-          <a x-data="{ tooltip: 'Delete' }" href="#">
+          <Link
+            x-data="{ tooltip: 'Delete' }"
+            to={`/patients/${record.patient_nid}/${record.id}`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -33,7 +37,7 @@ export default function PatientRecordTableRow({
                 clip-rule="evenodd"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </td>
     </tr>

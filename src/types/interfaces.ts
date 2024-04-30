@@ -58,18 +58,18 @@ export interface RecordDto {
   bodyTemperature: number;
   weight: number;
   MRI_Delay: number;
-  educationLevel: string;
-  dominantHand: string;
-  familyHistory: string;
-  smokingStatus: string;
+  education_Level: string;
+  dominant_Hand: string;
+  family_History: string;
+  smoking_Status: string;
   APOE_ε4: string;
-  physicalActivity: string;
-  depressionStatus: string;
-  cognitiveTestScores: number;
-  medicationHistory: string;
-  nutritionDiet: string;
-  sleepQuality: string;
-  chronicHealthConditions: string;
+  physical_Activity: string;
+  depression_Status: string;
+  cognitive_Test_Scores: number;
+  medication_History: string;
+  nutrition_Diet: string;
+  sleep_Quality: string;
+  chronic_Health_Conditions: string;
   dementia: boolean;
   prescription: string;
   dosage: number;
@@ -78,6 +78,28 @@ export interface RecordDto {
   created_at: Date;
 }
 
-
-
 export type PatientRecordsResponseDto = PatientDto & { records: RecordDto[] };
+
+export interface RecordReqDto {
+  diabetic: boolean;
+  alcoholLevel: number;
+  heartRate: number;
+  bloodOxygenLevel: number;
+  bodyTemperature: number;
+  weight: number;
+  MRI_Delay: number;
+  education_Level: string;
+  dominant_Hand: string;
+  family_History: string;
+  smoking_Status: string;
+  APOE_ε4: string;
+  physical_Activity: string;
+  depression_Status: string;
+  cognitive_Test_Scores: number;
+  medication_History: string;
+  nutrition_Diet: string;
+  sleep_Quality: string;
+  chronic_Health_Conditions: string;
+  patient_nid: string;
+  doctor_email: string;
+}
