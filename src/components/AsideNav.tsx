@@ -1,23 +1,31 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserResDto } from "../types/interfaces";
 
 export default function AsideNav() {
-  const { logout } = useAuthContext();
+  const navigate= useNavigate()
   const user = JSON.parse(
     localStorage.getItem("user") as string
   ) as unknown as UserResDto;
 
   const isAdmin = user.isAdmin;
 
+  function logout(){
+    localStorage.clear()
+    navigate('/')
+  }
+
   return (
     <article className="w-1/6 h-screen fixed top-0 left-0 hidden md:flex flex-col justify-between py-6 px-6">
-      <img src="/logow.png" className="w-11/12" alt="" />
+      <Link to="/">
+        <img src="/logow.png" className="w-11/12" alt="logo" />
+      </Link>
       <section className="flex flex-col gap-6">
         <CustomNavLink to="/dashboard" text="Dashboard" icon="home" />
         {isAdmin && <CustomNavLink to="/admins" text="Admins" icon="admin" />}
-        <CustomNavLink to="/doctors" text="Doctors" icon="doctor" />
+        {isAdmin && (
+          <CustomNavLink to="/doctors" text="Doctors" icon="doctor" />
+        )}
         <CustomNavLink to="/patients" text="Patients" icon="patient" />
         <CustomNavLink to="/profile" text="Profile" icon="user" />
       </section>

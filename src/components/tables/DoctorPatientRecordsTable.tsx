@@ -1,18 +1,15 @@
-import { RecordDto } from "../../types/interfaces";
-import PatientRecordTableRow from "./PatientRecordTableRow";
+import { DoctorPatientRecords } from "../../types/interfaces";
+import DoctorPatientRecordTableRow from "./DoctorPatientRecordTableRow";
 interface IPatientRecordsTable {
-  patientRecords: RecordDto[];
+  patientRecords: DoctorPatientRecords[];
 }
 
-export default function PatientRecordsTable({
+export default function DoctorPatientRecordsTable({
   patientRecords,
 }: IPatientRecordsTable) {
-  const patientRows = patientRecords
-    .sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    )
-    .map((record) => <PatientRecordTableRow key={record.id} record={record} />);
+  const patientRows = patientRecords.map((record) => (
+    <DoctorPatientRecordTableRow key={record.id} record={record} />
+  ));
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
@@ -22,7 +19,10 @@ export default function PatientRecordsTable({
               Tested Time
             </th>
             <th scope="col" className="px-6 py-4 font-medium text-dark">
-              Doctor Email
+              Patient Names
+            </th>
+            <th scope="col" className="px-6 py-4 font-medium text-dark">
+              Patient Phone Number
             </th>
             <th scope="col" className="px-6 py-4 font-medium text-dark">
               Dementia Status

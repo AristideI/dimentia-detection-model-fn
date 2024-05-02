@@ -18,7 +18,7 @@ export default function RecordsPage() {
         </Link>
       </section>
       {patientRecords && (
-        <PatientRecordsTable patientRecords={patientRecords} />
+        <PatientRecordsTable patientRecords={patientRecords.records} />
       )}
     </article>
   );

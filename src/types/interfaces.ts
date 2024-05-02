@@ -103,3 +103,5 @@ export interface RecordReqDto {
   patient_nid: string;
   doctor_email: string;
 }
+
+export type DoctorPatientRecords = RecordDto & { patient: PatientDto };

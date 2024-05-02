@@ -52,12 +52,11 @@ export default function AuthContextProvider({
     localStorage.setItem("user", JSON.stringify(user.data));
   };
   const logout = () => {
+    redirect("/login");
     setUser(null);
     setToken(null);
     setIsAuthenticated(false);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    redirect("/");
+    localStorage.clear();
   };
 
   const values = {

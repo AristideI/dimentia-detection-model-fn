@@ -1,6 +1,6 @@
 import axios from "axios";
 import { apiUrl } from "../utils/apiUrl";
-import { PatientRecordsResponseDto, RecordDto } from "../types/interfaces";
+import { DoctorPatientRecords, LoginResDto, PatientRecordsResponseDto, RecordDto } from "../types/interfaces";
 import { useEffect, useState } from "react";
 
 export function useGetPatientRecords(patientId: string) {
@@ -22,6 +22,31 @@ export function useGetPatientRecords(patientId: string) {
     };
     fetchpatientRecords();
   }, [patientId]);
+
+  return { patientRecords, loading, error };
+}
+export function useGetPatientRecordsOfDoctor() {
+  const [patientRecords, setpatientRecords] =
+    useState< DoctorPatientRecords[]>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const user = JSON.parse(
+    localStorage.getItem("user") as string
+  ) as LoginResDto;
+
+  useEffect(() => {
+    const fetchpatientRecords = async () => {
+      try {
+        const allpatientRecords = await getPatientRecordsForDoc(user.email);
+        setpatientRecords(allpatientRecords);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(true);
+      }
+    };
+    fetchpatientRecords();
+  }, [user.email]);
 
   return { patientRecords, loading, error };
 }
@@ -48,6 +73,17 @@ export function useGetRecordById(id: string) {
   return { record, loading, error };
 }
 
+async function getPatientRecordsForDoc(docEmail: string) {
+  const url = `${apiUrl}/records/latest/${docEmail}`;
+  const token = localStorage.getItem("token");
+  const records = await axios.get<DoctorPatientRecords[]>(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return records.data;
+}
+
 async function getPatientRecords(patientId: string) {
   const url = `${apiUrl}/patient/${patientId}/records`;
   const token = localStorage.getItem("token");
@@ -58,6 +94,7 @@ async function getPatientRecords(patientId: string) {
   });
   return admins.data;
 }
+
 async function getRecordById(id: string) {
   const url = `${apiUrl}/records/${id}`;
   const token = localStorage.getItem("token");
