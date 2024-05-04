@@ -1,9 +1,23 @@
 import { LoginResDto } from "../types/interfaces";
+import { socket } from "../utils/totalAvailableDoc";
 
 export default function DashboardHeader() {
   const user = JSON.parse(
     localStorage.getItem("user") as string
   ) as LoginResDto;
+
+  socket.emit("add_current_user", {
+    email: user.email,
+    isDoctor: !user.isAdmin,
+  });
+
+  socket.on("disconnect", (reason) => {
+    console.log(reason);
+    socket.emit("disconnect", {
+      email: user.email,
+      isDoctor: !user.isAdmin,
+    });
+  });
 
   return (
     <article className="text-dark flex justify-between items-center pb-12">
