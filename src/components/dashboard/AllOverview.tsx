@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { socket } from "../../utils/totalAvailableDoc";
+import { useAuthContext } from "../../context/AuthContext";
 
 export default function AllOverview({
   adminsCount,
@@ -30,11 +29,8 @@ function Card({
   count: number;
   icon: string;
 }) {
-  const [allDoc, setAllDoc] = useState(0);
-  socket.on("all_login_doc", (data) => {
-    setAllDoc(Number(data) || 0);
-    console.log('data=======>>>>',data);
-  });
+  const { totalDoc } = useAuthContext();
+
   return (
     <article className="bg-primary-300/20 p-6 rounded-xl flex items-center gap-6">
       <div className="bg-primary-100 w-14 h-14 rounded-lg flex items-center justify-center">
@@ -43,7 +39,9 @@ function Card({
       <section>
         <p className="text-lg font-bold">{title}</p>
         {title === "Doctors" && (
-          <p className="text-primary-400">{`${allDoc} / ${count}`} AVailable</p>
+          <p className="text-primary-400">
+            {`${totalDoc} / ${count}`} AVailable
+          </p>
         )}
         {title !== "Doctors" && (
           <p className="text-primary-400">{count} Total</p>

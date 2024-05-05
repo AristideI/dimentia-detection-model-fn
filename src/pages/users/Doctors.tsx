@@ -11,7 +11,7 @@ export default function DoctorsPage() {
   if (loading) return <LoadingSection />;
   return (
     <article>
-      <section className="flex justify-between items-center">
+      <section className="flex justify-between items-center px-10">
         <h1 className="text-3xl font-semibold text-dark">Doctors</h1>
         {isAdmin && (
           <Link

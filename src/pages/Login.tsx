@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { toast } from "react-toastify";
@@ -14,6 +14,13 @@ export default function LoginPage() {
   const [error, setError] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate, token]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

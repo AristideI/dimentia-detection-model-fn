@@ -1,23 +1,30 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserResDto } from "../types/interfaces";
+import { socket } from "../utils/totalAvailableDoc";
 
 export default function AsideNav() {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const user = JSON.parse(
     localStorage.getItem("user") as string
   ) as unknown as UserResDto;
 
   const isAdmin = user.isAdmin;
 
-  function logout(){
-    localStorage.clear()
-    navigate('/')
+  function logout() {
+    localStorage.clear();
+    socket.emit("logout");
+    navigate("/");
   }
 
   return (
     <article className="w-1/6 h-screen fixed top-0 left-0 hidden md:flex flex-col justify-between py-6 px-6">
-      <Link to="/">
+      <Link
+        to="/"
+        onClick={() => {
+          socket.emit("logout");
+        }}
+      >
         <img src="/logow.png" className="w-11/12" alt="logo" />
       </Link>
       <section className="flex flex-col gap-6">

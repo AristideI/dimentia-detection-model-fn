@@ -1,7 +1,9 @@
+import { useAuthContext } from "../context/AuthContext";
 import { LoginResDto } from "../types/interfaces";
 import { socket } from "../utils/totalAvailableDoc";
 
 export default function DashboardHeader() {
+  const { addTotalDoc } = useAuthContext();
   const user = JSON.parse(
     localStorage.getItem("user") as string
   ) as LoginResDto;
@@ -11,12 +13,9 @@ export default function DashboardHeader() {
     isDoctor: !user.isAdmin,
   });
 
-  socket.on("disconnect", (reason) => {
-    console.log(reason);
-    socket.emit("disconnect", {
-      email: user.email,
-      isDoctor: !user.isAdmin,
-    });
+  socket.on("all_login_doc", (data) => {
+    console.log('object===>>>',data);
+    addTotalDoc(Number(data));
   });
 
   return (
@@ -40,7 +39,7 @@ export default function DashboardHeader() {
           <p>{user.isAdmin ? "Admin" : "Doctor"}</p>
         </div>
         <img
-          src="/user.jpg"
+          src={user.profilePic ? user.profilePic : "/profile.jpg"}
           className="w-12 h-12 rounded-full object-cover"
           alt=""
         />

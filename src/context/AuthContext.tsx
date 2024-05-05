@@ -14,6 +14,8 @@ interface AuthContextType {
     isAdmin: boolean
   ) => Promise<void>;
   logout: () => void;
+  addTotalDoc: (data: number) => void;
+  totalDoc: number;
 }
 const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -21,6 +23,8 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   login: async () => {},
   logout: () => {},
+  addTotalDoc: () => {},
+  totalDoc: 0,
 });
 
 export default function AuthContextProvider({
@@ -31,6 +35,11 @@ export default function AuthContextProvider({
   const [user, setUser] = useState<UserResDto | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [totalDoc, setTotalDoc] = useState(0);
+
+  const addTotalDoc = (data: number) => {
+    setTotalDoc(data);
+  };
 
   const login = async (
     userName: string,
@@ -65,6 +74,8 @@ export default function AuthContextProvider({
     isAuthenticated,
     login,
     logout,
+    totalDoc,
+    addTotalDoc,
   };
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }

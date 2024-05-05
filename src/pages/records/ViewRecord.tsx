@@ -34,7 +34,7 @@ export default function ViewRecord() {
     html2pdf().set(options).from(content).save();
   };
 
-  console.log(patientId, recordId);
+  
   return (
     <>
       <section className="flex justify-end items-center px-10 mb-10">
@@ -100,12 +100,12 @@ export default function ViewRecord() {
                     key={key}
                     className={`${ind % 2 !== 0 ? "" : "bg-primary-200"}`}
                   >
-                    <td className="px-4 py-4whitespace-nowrap">
+                    <td className="px-4 py-2 whitespace-nowrap">
                       <div>
                         <p className="">{key}</p>
                       </div>
                     </td>
-                    <td className="px-12 py-4whitespace-nowrap">
+                    <td className="px-12 py-2 whitespace-nowrap">
                       <>
                         {key === "dementia" ? (
                           <div className="inline px-3 py-1">

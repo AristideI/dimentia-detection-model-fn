@@ -105,3 +105,15 @@ export interface RecordReqDto {
 }
 
 export type DoctorPatientRecords = RecordDto & { patient: PatientDto };
+
+export interface AllUserDto {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  profilePic?: string;
+}
+
+export type AdminPatientRecords = DoctorPatientRecords & {
+  doctor: AllUserDto;
+};

@@ -21,8 +21,10 @@ export default function AddAdminForm() {
       profilePic: "",
     };
     try {
-      const imageLink = await uploadImage(image!);
-      adminData.profilePic = imageLink;
+      if (image) {
+        const imageLink = await uploadImage(image);
+        adminData.profilePic = imageLink;
+      }
       await addAdmin(adminData);
       toast.success("Admin Created Successfully");
       navigate("/admins");

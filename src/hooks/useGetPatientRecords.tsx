@@ -1,6 +1,12 @@
 import axios from "axios";
 import { apiUrl } from "../utils/apiUrl";
-import { DoctorPatientRecords, LoginResDto, PatientRecordsResponseDto, RecordDto } from "../types/interfaces";
+import {
+  AdminPatientRecords,
+  DoctorPatientRecords,
+  LoginResDto,
+  PatientRecordsResponseDto,
+  RecordDto,
+} from "../types/interfaces";
 import { useEffect, useState } from "react";
 
 export function useGetPatientRecords(patientId: string) {
@@ -25,9 +31,35 @@ export function useGetPatientRecords(patientId: string) {
 
   return { patientRecords, loading, error };
 }
+
+export function useGetPatientRecordsOfAdmin() {
+  const [patientRecords, setpatientRecords] = useState<AdminPatientRecords[]>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const user = JSON.parse(
+    localStorage.getItem("user") as string
+  ) as LoginResDto;
+
+  useEffect(() => {
+    const fetchpatientRecords = async () => {
+      try {
+        const allpatientRecords = await getPatientRecordsForAdmin();
+        setpatientRecords(allpatientRecords);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(true);
+      }
+    };
+    fetchpatientRecords();
+  }, [user.email]);
+
+  return { patientRecords, loading, error };
+}
+
 export function useGetPatientRecordsOfDoctor() {
   const [patientRecords, setpatientRecords] =
-    useState< DoctorPatientRecords[]>();
+    useState<DoctorPatientRecords[]>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const user = JSON.parse(
@@ -77,6 +109,17 @@ async function getPatientRecordsForDoc(docEmail: string) {
   const url = `${apiUrl}/records/latest/${docEmail}`;
   const token = localStorage.getItem("token");
   const records = await axios.get<DoctorPatientRecords[]>(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return records.data;
+}
+
+async function getPatientRecordsForAdmin() {
+  const url = `${apiUrl}/records/latest`;
+  const token = localStorage.getItem("token");
+  const records = await axios.get<AdminPatientRecords[]>(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

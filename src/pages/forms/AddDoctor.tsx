@@ -21,8 +21,10 @@ export default function AddDoctorForm() {
       profilePic: "",
     };
     try {
-      const imageLink = await uploadImage(image!);
-      doctorData.profilePic = imageLink;
+      if (image) {
+        const imageLink = await uploadImage(image);
+        doctorData.profilePic = imageLink;
+      }
       await addDoctor(doctorData);
       toast.success("Doctor Created Successfully");
       navigate("/doctors");

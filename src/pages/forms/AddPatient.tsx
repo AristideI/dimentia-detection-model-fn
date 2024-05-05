@@ -87,8 +87,8 @@ export default function AddDoctorForm() {
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
             {...register("gender", { required: true })}
           >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
           </select>
         </label>
       </div>

@@ -1,6 +1,7 @@
 import LoadingSection from "../components/LoadingSection";
 import AllOverview from "../components/dashboard/AllOverview";
-import AdminTable from "../components/tables/AdminTable";
+import AdminDoctorsTable from "../components/tables/AdminDoctorsTable";
+import AdminPatientRecordsTable from "../components/tables/AdminPatientRecordsTable";
 import DoctorPatientRecordsTable from "../components/tables/DoctorPatientRecordsTable";
 import { useGetAdmins } from "../hooks/useGetAdmins";
 import { useGetDoctors } from "../hooks/useGetDoctor";
@@ -23,7 +24,12 @@ export default function DashboardPage() {
         patientsCount={patients.length}
         doctorsCount={doctors.length}
       />
-      {isAdmin && <AdminTable admins={admins.slice(0, 5)} />}
+      {isAdmin && (
+        <>
+          <AdminDoctorsTable />
+          <AdminPatientRecordsTable />
+        </>
+      )}
       {!isAdmin && patientRecords && (
         <DoctorPatientRecordsTable patientRecords={patientRecords} />
       )}
