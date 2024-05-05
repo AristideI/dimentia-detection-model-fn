@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { UserResDto } from "../../types/interfaces";
+import { SuperUserResDto, UserResDto } from "../../types/interfaces";
 
 export default function DoctorTableRow({ doctor }: { doctor: UserResDto }) {
-  const user = JSON.parse(localStorage.getItem("user") || "{}") as UserResDto;
-  const isAdmin = user.isAdmin;
+  const user = JSON.parse(
+    localStorage.getItem("user") || "{}"
+  ) as SuperUserResDto;
+  const isAdmin = user.isSuperAdmin;
   return (
     <tr className="hover:bg-gray-50">
       <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
@@ -26,6 +28,23 @@ export default function DoctorTableRow({ doctor }: { doctor: UserResDto }) {
         </span>
       </td>
       <td className="px-6 py-4">{doctor.phone}</td>
+      <td className="px-6 py-4">
+        {doctor.isActive ? (
+          <>
+            <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-600"></span>
+              Active
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary-red/10 px-2 py-1 text-xs font-semibold text-secondary-red">
+              <span className="h-1.5 w-1.5 rounded-full bg-secondary-red"></span>
+              Inactive
+            </span>
+          </>
+        )}
+      </td>
 
       <td className="px-6 py-4">
         <div className="flex justify-end gap-4">

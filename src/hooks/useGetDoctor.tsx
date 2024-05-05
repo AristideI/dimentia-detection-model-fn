@@ -100,3 +100,14 @@ async function getOneDoctor(email: string) {
   });
   return doctor.data;
 }
+
+export async function updateDoctorStatus(email: string) {
+  const token = localStorage.getItem("token");
+  const url = `${apiUrl}/doctor/update-status/${email}`;
+  const doctor = await axios.patch<UserResDto>(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return doctor.data;
+}

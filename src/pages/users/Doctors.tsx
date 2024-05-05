@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import DoctorsTable from "../../components/tables/DoctorTable";
 import { useGetDoctors } from "../../hooks/useGetDoctor";
-import { UserResDto } from "../../types/interfaces";
+import { SuperUserResDto } from "../../types/interfaces";
 import LoadingSection from "../../components/LoadingSection";
 
 export default function DoctorsPage() {
   const { doctors, loading } = useGetDoctors();
-  const user = JSON.parse(localStorage.getItem("user") || "{}") as UserResDto;
-  const isAdmin = user.isAdmin;
+  const user = JSON.parse(
+    localStorage.getItem("user") || "{}"
+  ) as SuperUserResDto;
+  const isAdmin = user.isSuperAdmin;
   if (loading) return <LoadingSection />;
   return (
     <article>

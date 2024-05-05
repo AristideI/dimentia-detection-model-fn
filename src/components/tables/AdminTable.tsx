@@ -19,6 +19,9 @@ export default function AdminTable({ admins }: { admins: UserResDto[] }) {
             <th scope="col" className="px-6 py-4 font-medium text-dark">
               Phone
             </th>
+            <th scope="col" className="px-6 py-4 font-medium text-dark">
+              Status
+            </th>
             <th scope="col" className="px-6 py-4 font-medium text-dark"></th>
           </tr>
         </thead>

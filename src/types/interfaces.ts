@@ -27,7 +27,11 @@ export interface UserResDto {
   token: string;
   profilePic?: string;
   isAdmin: boolean;
+  isActive: boolean;
 }
+
+export type SuperUserResDto = UserResDto & { isSuperAdmin: boolean };
+
 export interface LoginResDto {
   id: string;
   names: string;

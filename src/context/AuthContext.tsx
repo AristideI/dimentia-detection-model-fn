@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
-import { UserResDto } from "../types/interfaces";
+import { SuperUserResDto } from "../types/interfaces";
 import axios from "axios";
 import { apiUrl } from "../utils/apiUrl";
 import { redirect } from "react-router";
 
 interface AuthContextType {
-  user: UserResDto | null;
+  user: SuperUserResDto | null;
   token: string | null;
   isAuthenticated: boolean;
   login: (
@@ -32,7 +32,7 @@ export default function AuthContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<UserResDto | null>(null);
+  const [user, setUser] = useState<SuperUserResDto | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [totalDoc, setTotalDoc] = useState(0);
@@ -46,19 +46,22 @@ export default function AuthContextProvider({
     password: string,
     isAdmin: boolean
   ) => {
-    const user = await axios.post<UserResDto>(
-      `${apiUrl}/login/${isAdmin ? "admin" : "doctor"}`,
-      {
-        email: userName,
-        password: password,
-      }
-    );
-    user.data.isAdmin = isAdmin;
-    setUser(user.data);
-    setToken(user.data.token);
+    const user = await axios
+      .post<SuperUserResDto>(
+        `${apiUrl}/login/${isAdmin ? "admin" : "doctor"}`,
+        {
+          email: userName,
+          password: password,
+        }
+      )
+      .then((resp) => resp.data);
+    user.isSuperAdmin = user?.isAdmin || false;
+    user.isAdmin = isAdmin;
+    setUser(user);
+    setToken(user.token);
     setIsAuthenticated(true);
-    localStorage.setItem("token", user.data.token);
-    localStorage.setItem("user", JSON.stringify(user.data));
+    localStorage.setItem("token", user.token);
+    localStorage.setItem("user", JSON.stringify(user));
   };
   const logout = () => {
     redirect("/login");

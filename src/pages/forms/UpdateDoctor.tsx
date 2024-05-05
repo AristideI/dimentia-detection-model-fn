@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import "react-toastify/dist/ReactToastify.css";
-import { useGetOneDoctor } from "../../hooks/useGetDoctor";
+import { updateDoctorStatus, useGetOneDoctor } from "../../hooks/useGetDoctor";
 
 export default function UpdateDoctorForm() {
   const doctorEmail = useParams().id;
@@ -16,6 +16,13 @@ export default function UpdateDoctorForm() {
   const { register, handleSubmit, setValue } = useForm<UserReqDto>();
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (doctor) {
+      setIsActive(doctor.isActive);
+    }
+  }, [doctor]);
 
   useEffect(() => {
     if (doctor) {
@@ -44,6 +51,17 @@ export default function UpdateDoctorForm() {
       setLoading(false);
     }
   }
+
+  async function handleUpdateStatus() {
+    try {
+      const user = await updateDoctorStatus(`${doctorEmail}`);
+      setIsActive(user.isActive);
+    } catch (error) {
+      toast.error("Failed to Update Status");
+      return;
+    }
+  }
+
   return (
     <>
       <ToastContainer />
@@ -52,8 +70,24 @@ export default function UpdateDoctorForm() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-center items-center w-full md:w-2/3 gap-12 mt-12"
         >
-          <div className="w-full">
+          <div className="w-full flex justify-between items-center">
             <p className="text-left text-2xl font-bold">Update Doctor</p>
+            {isActive === true && (
+              <p
+                className="text-left text-2xl px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-secondary-red"
+                onClick={handleUpdateStatus}
+              >
+                Deactivate Account
+              </p>
+            )}
+            {isActive === false && (
+              <p
+                onClick={handleUpdateStatus}
+                className="text-left text-2xl px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-green-600"
+              >
+                Activate Doctor
+              </p>
+            )}
           </div>
           <div className="flex gap-6 w-full">
             <label className="flex flex-col w-1/2 gap-1 font-medium">

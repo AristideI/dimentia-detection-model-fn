@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { UserResDto } from "../types/interfaces";
+import { SuperUserResDto } from "../types/interfaces";
 import { socket } from "../utils/totalAvailableDoc";
 
 export default function AsideNav() {
   const navigate = useNavigate();
   const user = JSON.parse(
     localStorage.getItem("user") as string
-  ) as unknown as UserResDto;
+  ) as unknown as SuperUserResDto;
 
   const isAdmin = user.isAdmin;
 
@@ -29,7 +29,9 @@ export default function AsideNav() {
       </Link>
       <section className="flex flex-col gap-6">
         <CustomNavLink to="/dashboard" text="Dashboard" icon="home" />
-        {isAdmin && <CustomNavLink to="/admins" text="Admins" icon="admin" />}
+        {user.isSuperAdmin && (
+          <CustomNavLink to="/admins" text="Admins" icon="admin" />
+        )}
         {isAdmin && (
           <CustomNavLink to="/doctors" text="Doctors" icon="doctor" />
         )}

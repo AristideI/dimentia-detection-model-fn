@@ -66,3 +66,14 @@ async function getOneAdmin(email: string) {
   });
   return doctor.data;
 }
+
+export async function updateAdminStatus(email: string) {
+  const token = localStorage.getItem("token");
+  const url = `${apiUrl}/admin-user/update-status/${email}`;
+  const doctor = await axios.patch<UserResDto>(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return doctor.data;
+}
