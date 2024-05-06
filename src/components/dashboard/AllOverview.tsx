@@ -40,7 +40,7 @@ function Card({
         <p className="text-lg font-bold">{title}</p>
         {title === "Doctors" && (
           <p className="text-primary-400">
-            {`${totalDoc} / ${count}`} AVailable
+            {`${totalDoc} / ${count}`} Available
           </p>
         )}
         {title !== "Doctors" && (

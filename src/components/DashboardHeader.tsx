@@ -14,7 +14,7 @@ export default function DashboardHeader() {
   });
 
   socket.on("all_login_doc", (data) => {
-    console.log('object===>>>',data);
+    console.log("object===>>>", data);
     addTotalDoc(Number(data));
   });
 
@@ -25,13 +25,6 @@ export default function DashboardHeader() {
           <p className="font-bold text-lg">Hello {user.names}!</p>
           <p>Welcome back to dashboard</p>
         </div>
-        <form>
-          <input
-            type="search"
-            placeholder="Search"
-            className="border border-primary-300 bg-transparent rounded-lg p-2 text-sm text-primary-4 w-72"
-          />
-        </form>
       </section>
       <section className="flex text-end items-center gap-6">
         <div>

@@ -74,7 +74,7 @@ export default function UpdateDoctorForm() {
             <p className="text-left text-2xl font-bold">Update Doctor</p>
             {isActive === true && (
               <p
-                className="text-left text-2xl px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-secondary-red"
+                className="text-left px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-secondary-red"
                 onClick={handleUpdateStatus}
               >
                 Deactivate Account
@@ -83,7 +83,7 @@ export default function UpdateDoctorForm() {
             {isActive === false && (
               <p
                 onClick={handleUpdateStatus}
-                className="text-left text-2xl px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-green-600"
+                className="text-left px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-green-600"
               >
                 Activate Doctor
               </p>

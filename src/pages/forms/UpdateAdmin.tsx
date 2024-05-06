@@ -71,25 +71,25 @@ export default function UpdateAdminForm() {
           className="flex flex-col justify-center items-center w-full md:w-2/3 gap-12 mt-12"
         >
           <div className="w-full">
-          <div className="w-full flex justify-between items-center">
-            <p className="text-left text-2xl font-bold">Update Admin</p>
-            {isActive === true && (
-              <p
-                className="text-left text-2xl px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-secondary-red"
-                onClick={handleUpdateStatus}
-              >
-                Deactivate Account
-              </p>
-            )}
-            {isActive === false && (
-              <p
-                onClick={handleUpdateStatus}
-                className="text-left text-2xl px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-green-600"
-              >
-                Activate Doctor
-              </p>
-            )}
-          </div>
+            <div className="w-full flex justify-between items-center">
+              <p className="text-left text-2xl font-bold">Update Admin</p>
+              {isActive === true && (
+                <p
+                  className="text-left px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-secondary-red"
+                  onClick={handleUpdateStatus}
+                >
+                  Deactivate Account
+                </p>
+              )}
+              {isActive === false && (
+                <p
+                  onClick={handleUpdateStatus}
+                  className="text-left px-4 py-3 rounded-lg hover:cursor-pointer text-white font-bold bg-green-600"
+                >
+                  Activate Doctor
+                </p>
+              )}
+            </div>
           </div>
           <div className="flex gap-6 w-full">
             <label className="flex flex-col w-1/2 gap-1 font-medium">
