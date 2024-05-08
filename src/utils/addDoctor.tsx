@@ -5,11 +5,12 @@ import axios from "axios";
 export default async function addDoctor(doctorData: UserReqDto) {
   const url = `${apiUrl}/doctor`;
   const token = localStorage.getItem("token");
+  const validData = { ...doctorData, isActive: true };
 
   if (!token) {
     throw new Error("Token not found");
   }
-  const newUser = await axios.post(url, doctorData, {
+  const newUser = await axios.post(url, validData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -26,7 +27,7 @@ export async function updateDoctor(email: string, doctorData: UserReqDto) {
     lastName: doctorData.lastName,
     phone: doctorData.phone,
     password: doctorData.password,
-    profilePic: doctorData.profilePic||'',
+    profilePic: doctorData.profilePic || "",
   };
 
   if (!token) {

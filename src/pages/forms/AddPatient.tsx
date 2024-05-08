@@ -21,6 +21,8 @@ export default function AddDoctorForm() {
     } catch (error) {
       toast.error("Failed to Create Patient");
       return;
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -78,7 +80,12 @@ export default function AddDoctorForm() {
             type="text"
             placeholder="National ID"
             className="bg-gray-200/0 border-2 border-primary-400/35  rounded-lg py-2 px-4"
-            {...register("nid", { required: true })}
+            {...register("nid", {
+              required: true,
+              minLength: 16,
+              maxLength: 16,
+              pattern: /^[0-9]+$/,
+            })}
           />
         </label>
         <label className="flex flex-col w-1/2 gap-1 font-medium">
